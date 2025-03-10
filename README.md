@@ -241,6 +241,31 @@ Additional models from OpenAI, Anthropic, and together.ai platforms are also sup
 
 Below is a summary of performance across different models and prompting strategies based on our paper experiments:
 
+| Model                                   | DCE  | CUDA | x86-64 | OJ_A | OJ_V | OJ_VA | Overall Accuracy |
+|-----------------------------------------|------|------|--------|------|------|-------|------------------|
+| *Random Baseline*                        | 50.0 | 50.0 | 50.0   | 50.0 | 50.0 | 50.0  | 50.0             |
+| Llama-3.2-3B-Instruct-Turbo             | 50.0 | 49.8 | 50.0   | 51.5 | 51.5 | 51.5  | 50.7             |
+| Llama-3.1-8B-Instruct-Turbo             | 41.8 | 49.8 | 50.5   | 57.5 | 75.5 | 56.8  | 55.3             |
+| Mistral-7B-Instruct-v0.3                | 51.0 | 57.2 | 73.8   | 50.7 | 50.5 | 50.2  | 55.6             |
+| Mixtral-8x7B-Instruct-v0.1              | 50.2 | 47.0 | 64.2   | 59.0 | 61.5 | 55.0  | 56.1             |
+| Mixtral-8x22B-Instruct-v0.1             | 46.8 | 49.0 | 62.7   | 63.5 | 76.0 | 62.7  | 60.1             |
+| Llama-3.1-70B-Instruct-Turbo            | 47.5 | 50.0 | 58.5   | 66.2 | 72.0 | 67.5  | 60.3             |
+| QwQ-32B-Preview                         | 48.2 | 50.5 | 62.7   | 65.2 | 71.2 | 64.2  | 60.3             |
+| Qwen2.5-7B-Instruct-Turbo               | 50.5 | 49.2 | 58.0   | 62.0 | 80.8 | 63.0  | 60.6             |
+| gpt-4o-mini-2024-07-18                  | 46.8 | 50.2 | 56.8   | 64.5 | 91.2 | 64.0  | 62.2             |
+| Qwen2.5-72B-Instruct-Turbo              | 42.8 | 56.0 | 64.8   | 72.0 | 76.5 | 70.8  | 63.8             |
+| Llama-3.1-405B-Instruct-Turbo           | 40.0 | 49.0 | 75.0   | 72.2 | 74.5 | 72.8  | 63.9             |
+| DeepSeek-V3                             | 41.0 | 50.7 | 69.2   | 73.0 | 83.5 | 72.5  | 65.0             |
+| gpt-4o-2024-11-20                       | 43.2 | 49.5 | 65.2   | 71.0 | 87.0 | 73.8  | 65.0             |
+| claude3.5-sonnet-2024-10-22             | 38.5 | **62.3** | 70.0   | 71.2 | 78.0 | 73.5  | 65.6             |
+| o1-mini-2024-09-12                      | 55.8 | 50.7 | 74.2   | 80.0 | 89.8 | 78.8  | 71.5             |
+| DeepSeek-R1                             | 52.2 | 61.0 | 78.2   | 79.8 | **91.5** | 78.0  | 73.5             |
+| o3-mini-2025-01-31                      | **68.8** | 59.0 | **84.5** | **84.2** | 88.2 | **83.2** | **78.0** |
+| **Mean**                                | 47.9 | 52.4 | 65.8   | 67.3 | 76.4 | 67.0  | 62.8             |
+
+**Table 2: Accuracy of 17 models on EquiBench under 0-shot prompting.**  
+We report accuracy for each of the six equivalence categories along with the overall accuracy.
+
 *Note: These results represent average accuracy across all categories. For detailed results, please refer to our [paper](https://arxiv.org/pdf/2502.12466).*
 
 ## Citation
