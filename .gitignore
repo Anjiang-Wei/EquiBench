@@ -201,3 +201,5 @@ original/oj/eval_output*/p*.json
 
 /data
 datasets
+
+.python-version
