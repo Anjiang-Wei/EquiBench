@@ -77,20 +77,20 @@ f"""EvalInput(
 )"""
     
 class EvalOutput:
-    def __init__(self, pred_fixed: Optional[bool], content: Optional[str], eval_error: Optional[EvalError]):
-        self.pred_fixed       = pred_fixed
-        self.pred_fixed_label = pred_fixed if pred_fixed is not None else random.choice([True, False])
+    def __init__(self, pred_original: Optional[bool], content: Optional[str], eval_error: Optional[EvalError]):
+        self.pred_original    = pred_original
+        self.pred_final       = pred_original if pred_original is not None else random.choice([True, False])
         self.content          = content
         self.eval_error       = eval_error
     
     def __repr__(self):
         return \
 f"""EvalOutput(
-    content          = {self.content}
-    pred_fixed       = {self.pred_fixed}
-    pred_fixed_label = {self.pred_fixed_label}
-    eval_error       = {self.eval_error}
+    content        = {self.content}
+    pred_original  = {self.pred_original}
+    pred_final     = {self.pred_final}
+    eval_error     = {self.eval_error}
 )"""
         
     def accuracy(self, truth_label: bool) -> float:
-        return 1.0 if self.pred_fixed_label == truth_label else 0.0
+        return 1.0 if self.pred_final == truth_label else 0.0

@@ -23,15 +23,14 @@ async def pair_evalute(pair: Pair, prompt_type: PromptType, model: str, category
 
         truth_label           = pair.truth_label,
 
-        # eval_pred_label       = output.pred_label, # deprecated
         eval_content          = output.content,
         stat_accuracy         = stat_accuracy,
 
         eval_error_message    = eval_error_message,
         eval_error_code       = eval_error_code,
 
-        eval_pred_fixed       = output.pred_fixed,
-        eval_pred_fixed_label = output.pred_fixed_label
+        eval_pred_original    = output.pred_original,
+        eval_pred_final       = output.pred_final
     )
 
 async def evaluate(input: EvalInput) -> EvalOutput:
@@ -81,37 +80,37 @@ async def pairs_evaluate_openai_batch(pairs: list[Pair], prompt_type: PromptType
 
 def eval_output_from_eval_error(eval_error: EvalError, content: Optional[str] = None):
     return EvalOutput(
-        pred_fixed = None,
+        pred_original = None,
         content    = content or eval_error.content,
         eval_error = eval_error
     )
 
 async def eval_output_from_llm_generated(input: EvalInput, content: str):
     if content.strip() in ["YES", "YES\n```"]:
-        pred_fixed = True
+        pred_original = True
         
     elif content.strip() in  ["NO", "No\n```"]:
-        pred_fixed = False
+        pred_original = False
     
     else:
-        pred_fixed = await llm_judge(content=content)
+        pred_original = await llm_judge(content=content)
         logging.info(
 f"""
 [LLM Judge Generated]
-====================[input     ]====================
+====================[input        ]====================
  {input}
-====================[content   ]====================
+====================[content      ]====================
 {content}
-====================[pred_fixed]====================
-{pred_fixed}
+====================[pred_original]====================
+{pred_original}
 """
         )
 
-    if pred_fixed is None:
+    if pred_original is None:
         raise EvalError(code=EvalErrorCode.output_parse_error, content = content, inner_error=None)
     
     return EvalOutput(
-        pred_fixed = pred_fixed, 
+        pred_original = pred_original, 
         content    = content,
         eval_error = None
     )

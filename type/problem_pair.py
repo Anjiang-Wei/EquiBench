@@ -114,15 +114,14 @@ class Pair:
     eval_model          : Optional[str       ] = field(default=None, metadata=config(exclude=excludeIfNone))
     
 
-    eval_pred_label     : Optional[bool      ] = field(default=None, metadata=config(exclude=excludeIfNone)) # deprecated
     eval_content        : Optional[str       ] = field(default=None, metadata=config(exclude=excludeIfNone))
     
     stat_accuracy       : Optional[float     ] = field(default=None, metadata=config(exclude=excludeIfNone))
     eval_error_code     : Optional[str       ] = field(default=None, metadata=config(exclude=excludeIfNone))
     eval_error_message  : Optional[str       ] = field(default=None, metadata=config(exclude=excludeIfNone))
     
-    eval_pred_fixed      : Optional[bool      ] = field(default=None, metadata=config(exclude=excludeIfNone)) # true, false, None
-    eval_pred_fixed_label: Optional[bool      ] = field(default=None, metadata=config(exclude=excludeIfNone)) # true, false, random([true, false])
+    eval_pred_original  : Optional[bool      ] = field(default=None, metadata=config(exclude=excludeIfNone)) # true, false, None
+    eval_pred_final     : Optional[bool      ] = field(default=None, metadata=config(exclude=excludeIfNone)) # true, false, random([true, false])
 
     similarity           : Optional[float]     = field(default=None, metadata=config(exclude=excludeIfNone))
     length               : Optional[float]     = field(default=None, metadata=config(exclude=excludeIfNone))
