@@ -6,6 +6,7 @@
 - [Daily Setup](#daily-setup)
 - [Step 1: Downloading Datasets](#step-1-downloading-datasets)
 - [Step 2: Running Evaluations](#step-2-running-evaluations)
+- [Citation](#citation)
 
 ## Initial Setup
 
@@ -177,7 +178,7 @@ python step2_eval.py data result/eval \
 ```plaintext
 @article{wei2025equibench,
   title={EquiBench: Benchmarking Code Reasoning Capabilities of Large Language Models via Equivalence Checking},
-  author={Wei, Anjiang and Cao, Jiannan and Li, Ran and Chen, Hongyu and Zhang, Yuhui and Wang, Ziheng and Sun, Yaofeng and Liu, Yuan and Teixeira, Thiago SFX and Yang, Diyi and others},
+  author={Wei, Anjiang and Cao, Jiannan and Li, Ran and Chen, Hongyu and Zhang, Yuhui and Wang, Ziheng and Sun, Yaofeng and Liu, Yuan and Teixeira, Thiago S. F. X. and Yang, Diyi and Wang, Ke and Aiken, Alex},
   journal={arXiv preprint arXiv:2502.12466},
   year={2025}
 }
