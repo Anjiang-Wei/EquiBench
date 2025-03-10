@@ -34,9 +34,8 @@ class EquiBenchDatasets:
         print(dataset)
         return dataset
 
-    def save(self, config_name: str, dataset: Dataset, save_path: Path):
+    def save(self, config_name: str, dataset: Dataset, data_path: Path):
         """Save the loaded dataset to disk in JSON format with indent=4"""
-        save_path.mkdir(parents=True, exist_ok=True)
-        json_path = save_path / f"pairs.json"
+        json_path = data_path / config_name / f"pairs.json"
         dataset.to_json(json_path, orient="records", lines=False, indent=4)
         print(f"Saved {config_name} to {json_path}")

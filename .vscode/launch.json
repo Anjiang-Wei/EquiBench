@@ -7,7 +7,9 @@
             "request": "launch",
             "program": "step1_data.py",
             "console": "integratedTerminal",
-            "args": []
+            "args": [
+                "data"
+            ]
         },
         {
             "name": "Python: step2_eval",

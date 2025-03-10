@@ -75,7 +75,7 @@
 2. Run the command line:
 
     ```Shell
-    python step1_data.py
+    python step1_data.py data
     ```
 
 ## Step 2: Evaluation
