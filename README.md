@@ -11,7 +11,7 @@ EquiBench is a comprehensive benchmark designed to evaluate the code reasoning c
 
 ### Key Features
 
-- **Diverse Test Cases**: Includes 400 pairs of equivalent programs across six distinct categories (`DCE`, `STOKE`, `TVM`, `OJ_A`, `OJ_V`, `OJ_VA`)
+- **Diverse Test Cases**: Includes 2400 pairs of equivalent programs across six distinct categories (`DCE` for C programs, `STOKE` for x86-64 programs, `TVM` for CUDA programs, and `OJ_A`, `OJ_V`, `OJ_VA` for Python competitive programming problems)
 - **Multiple Prompting Strategies**: Support for zero-shot, few-shot, and chain-of-thought variations to evaluate different reasoning approaches
 - **Wide Model Support**: Compatible with leading LLMs from OpenAI, Anthropic, Meta, Mistral AI, Qwen, and DeepSeek
 - **Standardized Methodology**: Consistent evaluation framework enabling fair comparison across different model architectures
@@ -162,16 +162,16 @@ python step2_eval.py data custom_results --prompt_types ZERO FEW
 
 ## Dataset Structure
 
-EquiBench contains six distinct categories of code equivalence tasks:
+EquiBench contains 2400 pairs of programs across six distinct categories of code equivalence tasks:
 
-- **DCE (Dead Code Elimination)**: Code pairs that differ by removal of unused code
-- **STOKE (Superoptimizer Toolkit for Equality)**: Assembly code pairs optimized using the STOKE framework
-- **TVM (Tensor Virtual Machine)**: Code pairs optimized for tensor operations
-- **OJ_A (Online Judge - Algorithm)**: Different algorithmic solutions to the same programming problem
-- **OJ_V (Online Judge - Variables)**: Code pairs with variable renaming transformations
-- **OJ_VA (Online Judge - Variables and Algorithms)**: Code pairs with both variable renaming and algorithmic differences
+- **DCE (Dead Code Elimination for C programs)**: Code pairs that differ by removal of dead / live code
+- **STOKE (Superoptimizer for x86-64 program)**: Assembly code pairs optimized using the STOKE framework
+- **TVM (Compiler Scheduling for CUDA programs)**: Code pairs optimized for tensor operations
+- **OJ_A (Python Competitive Programming - Algorithm)**: Different algorithmic solutions to the same programming problem
+- **OJ_V (Python Competitive Programming - Variable Renaming)**: Code pairs with variable renaming transformations
+- **OJ_VA (Python Competitive Programming - Variables + Algorithms)**: Code pairs with both variable renaming and algorithmic differences
 
-Each category contains 400 pairs of programs that are functionally equivalent but syntactically different, providing a diverse range of challenges for LLMs to reason about code semantics.
+Each category contains 400 pairs of programs (200 equivalent and 200 inequivalent), providing a diverse range of challenges for LLMs to reason about code semantics.
 
 ## Supported Prompt Types
 
