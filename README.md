@@ -83,7 +83,7 @@
 1. Run the command line:
 
     ```Shell
-    python step2_eval.py \
+    python step2_eval.py data result/eval \
       --prompt_types ZERO \
       --models \
         openai/gpt-4o-mini-2024-07-18 \
