@@ -2,7 +2,7 @@
 
 ## Initial Setup
 
-1. Git clone and cd
+1. Clone the repository and navigate to the directory
 
     ```Shell
     git clone https://github.com/Anjiang-Wei/EquiBench.git
@@ -16,19 +16,27 @@
     pyenv local 3.12
     ```
 
-3. Create a virtual environment
+3. Create a virtual environment and activate it
 
     ```Shell
     python -m venv .venv
+    source .venv/bin/activate
     ```
 
-4. Create a `.env` file:
+4. Update pip and install required packages
+
+    ```Shell
+    pip install --upgrade pip
+    pip install .
+    ```
+
+5. Create a `.env` file to store API keys:
 
     ```Shell
     touch .env
     ```
 
-5. Write all keys into the `.env` file:
+6. Add the following API keys to your `.env` file:
 
     ```Shell
     OPENAI_API_KEY=
@@ -39,7 +47,7 @@
 
 ## Daily Setup
 
-1. cd into the repo folder
+1. Navigate to the repository directory
 
     ```Shell
     cd EquiBench
