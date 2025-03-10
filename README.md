@@ -18,10 +18,11 @@
 
 2. Use Python version 3.12 or higher
   
-  You could use `pyenv` to manage Python version:
-    prereuiarement: [install pyenv](https://github.com/pyenv/pyenv)
+    You can use `pyenv` to manage Python versions:
 
-    install Python 3.12 using pyenv:
+    Prerequisite: [Install pyenv](https://github.com/pyenv/pyenv)
+
+    Install Python 3.12 using pyenv:
   
     ```Shell
     pyenv install 3.12
@@ -171,7 +172,7 @@ python step2_eval.py data result/eval \
 
 ## Citation
 
-[Paper](https://arxiv.org/pdf/2502.12466)
+[Paper Link](https://arxiv.org/pdf/2502.12466)
 
 ```plaintext
 @article{wei2025equibench,
