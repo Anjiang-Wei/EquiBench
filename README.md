@@ -1,4 +1,4 @@
-# EquiBench
+# EquiBench: Benchmarking Code Reasoning Capabilities of Large Language Models via Equivalence Checking
 
 ## Table of Contents
 
@@ -17,7 +17,12 @@
     ```
 
 2. Use Python version 3.12 or higher
+  
+  You could use `pyenv` to manage Python version:
+    prereuiarement: [install pyenv](https://github.com/pyenv/pyenv)
 
+    install Python 3.12 using pyenv:
+  
     ```Shell
     pyenv install 3.12
     pyenv local 3.12
@@ -163,3 +168,16 @@ python step2_eval.py data result/eval \
     ```
 
   - Other OpenAI, Anthorpic and together.ai models
+
+## Citation
+
+[Paper](https://arxiv.org/pdf/2502.12466)
+
+```plaintext
+@article{wei2025equibench,
+  title={EquiBench: Benchmarking Code Reasoning Capabilities of Large Language Models via Equivalence Checking},
+  author={Wei, Anjiang and Cao, Jiannan and Li, Ran and Chen, Hongyu and Zhang, Yuhui and Wang, Ziheng and Sun, Yaofeng and Liu, Yuan and Teixeira, Thiago SFX and Yang, Diyi and others},
+  journal={arXiv preprint arXiv:2502.12466},
+  year={2025}
+}
+```
