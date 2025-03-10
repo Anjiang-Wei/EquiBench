@@ -156,7 +156,7 @@ python step2_eval.py data result/eval --prompt_types FEW --categories OJ_A --lim
 # Evaluate one model on all categories with chain-of-thought reasoning
 python step2_eval.py data result/eval --prompt_types ZERO_COT --models openai/gpt-4o-2024-11-20
 
-# Custom logging and output directory
+# Custom output directory
 python step2_eval.py data custom_results --prompt_types ZERO FEW
 ```
 
@@ -263,7 +263,7 @@ Below is a summary of performance across different models and prompting strategi
 | o3-mini-2025-01-31                      | **68.8** | 59.0 | **84.5** | **84.2** | 88.2 | **83.2** | **78.0** |
 | **Mean**                                | 47.9 | 52.4 | 65.8   | 67.3 | 76.4 | 67.0  | 62.8             |
 
-**Table 2: Accuracy of 17 models on EquiBench under 0-shot prompting.**  
+**Table: Accuracy of 17 models on EquiBench under 0-shot prompting.**  
 We report accuracy for each of the six equivalence categories along with the overall accuracy.
 
 *Note: These results represent average accuracy across all categories. For detailed results, please refer to our [paper](https://arxiv.org/pdf/2502.12466).*
