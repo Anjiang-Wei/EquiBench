@@ -3,7 +3,7 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 [![arXiv](https://img.shields.io/badge/arXiv-2502.12466-b31b1b.svg)](https://arxiv.org/abs/2502.12466)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Python](https://img.shields.io/badge/python-3.12+-yellow.svg)](https://www.python.org/downloads/)
+[![Python](https://img.shields.io/badge/Python->=3.12-blue.svg)](https://www.python.org/downloads/)
 [![HuggingFace](https://img.shields.io/badge/🤗%20Hugging%20Face-EquiBench_Datasets-orange.svg)](https://huggingface.co/datasets/anjiangwei/EquiBench-Datasets)
 
 ## Overview
