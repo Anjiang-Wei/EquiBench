@@ -1,5 +1,5 @@
 [project]
-name = "equivbench"
+name = "EquiBench"
 version = "0.1"
 requires-python = ">= 3.12"
 
@@ -11,9 +11,9 @@ dependencies = [
 
   # data science
   "pandas",
-  "scikit-learn",
-  "scipy",
-  "matplotlib",
+  # "scikit-learn",
+  # "scipy",
+  # "matplotlib",
 
   # Validation and serialization
   "dataclasses_json",
@@ -22,14 +22,14 @@ dependencies = [
 
   # General utilities
   "python-dotenv",
-  "natsort",
+  # "natsort",
 
   # Parsing and web scraping
   "pyyaml",
-  "bs4",
+  # "bs4",
 
   # similarity of the code
-  "mosspy",
+  # "mosspy",
 
   # huggingface
   "datasets"
