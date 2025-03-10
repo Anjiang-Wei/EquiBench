@@ -1,0 +1,39 @@
+[project]
+name = "equivbench"
+version = "0.1"
+requires-python = ">= 3.12"
+
+dependencies = [
+  # LLM Platform
+  "openai",
+  "anthropic",
+  "together",
+
+  # data science
+  "pandas",
+  "scikit-learn",
+  "scipy",
+  "matplotlib",
+
+  # Validation and serialization
+  "dataclasses_json",
+  "marshmallow",
+  "jsonlines",
+
+  # General utilities
+  "python-dotenv",
+  "natsort",
+
+  # Parsing and web scraping
+  "pyyaml",
+  "bs4",
+
+  # similarity of the code
+  "mosspy",
+
+  # huggingface
+  "datasets"
+]
+
+[tool.setuptools]
+packages = []
