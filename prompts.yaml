@@ -1,0 +1,1555 @@
+true_label: "YES"
+false_label: "NO"
+true_keywords:
+  - "YES"
+
+false_keywords:
+  - "NO"
+
+DCE:
+  ZERO: |
+    You are here to judge if two C programs are semantically equivalent.
+    Here equivalence means that, when run on the same input, the two programs always have the same program state at all corresponding points reachable by program execution.
+    [Program 1]:
+    {program_1_code}
+    [Program 2]:
+    {program_2_code}
+    
+    Please only output the answer of whether the two programs are equivalent or not. You should only output {true_label} or {false_label}.
+  ZERO_COT: |
+    You are here to judge if two C programs are semantically equivalent.
+    Here equivalence means that, when run on the same input, the two programs always have the same program state at all corresponding points reachable by program execution.
+    [Program 1]:
+    {program_1_code}
+    [Program 2]:
+    {program_2_code}
+    
+    Please output the answer of whether the two programs are equivalent or not. You should output {true_label} or {false_label} in the end. Let's think step by step.
+  FEW: |
+    You are here to judge if two C programs are semantically equivalent.
+    Here equivalence means that, when run on the same input, the two programs always have the same program state at all corresponding points reachable by program execution.
+
+    [Example 1]:
+      [Program 1]:
+        int main() {{
+          int x = 0;
+          if (false) {{
+            x = 1;
+          }}
+          return 0;
+        }}
+      [Program 2]:
+        int main() {{
+          int x = 0;
+          if (true) {{
+            x = 1;
+          }}
+          return 0;
+        }}
+      [Answer]: NO
+    [Example 2]:
+      [Program 1]:
+        int main() {{
+          int x = 0;
+          if (false) {{
+            x = 1;
+          }}
+          return 0;
+        }}
+      [Program 2]:
+        int main() {{
+          int x = 0;
+          return 0;
+        }}
+      [Answer]: YES
+    [Example 3]:
+      [Program 1]:
+        char b[2];
+        static int c = 0;
+        int main() {{
+          if (&b[0] == &c) {{
+              c = 1;
+          }}
+          return 0;
+        }}
+      [Program 2]:
+        char b[2];
+        static int c = 0;
+        int main() {{
+          c = 1;
+          return 0;
+        }}
+      [Answer]: NO
+    [Example 4]:
+      [Program 1]:
+        char b[2];
+        static int c = 0;
+        int main() {{
+          if (&b[0] == &c) {{
+              c = 1;
+          }}
+          return 0;
+        }}
+      [Program 2]:
+        char b[2];
+        static int c = 0;
+        int main() {{
+          return 0;
+        }}
+      [Answer]: YES
+    [Program 1]:
+    {program_1_code}
+    [Program 2]:
+    {program_2_code}
+    
+    Please only output the answer of whether the two programs are equivalent or not. You should only output {true_label} or {false_label}.
+  FEW_COT: |
+    You are here to judge if two C programs are semantically equivalent.
+    Here equivalence means that, when run on the same input, the two programs always have the same program state at all corresponding points reachable by program execution.
+
+    [Example 1]:
+      [Program 1]:
+        int main() {{
+          int x = 0;
+          if (false) {{
+            x = 1;
+          }}
+          return 0;
+        }}
+      [Program 2]:
+        int main() {{
+          int x = 0;
+          if (true) {{
+            x = 1;
+          }}
+          return 0;
+        }}
+      [Answer]: x = 1 in program 1 will not be executed, but x = 1 in program 2 will be executed, leading to different program states.
+                The answer is NO.
+    [Example 2]:
+      [Program 1]:
+        int main() {{
+          int x = 0;
+          if (false) {{
+            x = 1;
+          }}
+          return 0;
+        }}
+      [Program 2]:
+        int main() {{
+          int x = 0;
+          return 0;
+        }}
+      [Answer]: x = 1 in program 1 will not be executed, and this statement does not exist in program 2. Program states are always the same.
+                The answer is YES.
+    [Example 3]:
+      [Program 1]:
+        char b[2];
+        static int c = 0;
+        int main() {{
+          if (&b[0] == &c) {{
+              c = 1;
+          }}
+          return 0;
+        }}
+      [Program 2]:
+        char b[2];
+        static int c = 0;
+        int main() {{
+          c = 1;
+          return 0;
+        }}
+      [Answer]: The if statement in program 1 checks whether the memory address of b[0] equals c's address.
+                c = 1 will not be executed in program 1, leading to a program state different from program 2.
+                The answer is NO.
+    [Example 4]:
+      [Program 1]:
+        char b[2];
+        static int c = 0;
+        int main() {{
+          if (&b[0] == &c) {{
+              c = 1;
+          }}
+          return 0;
+        }}
+      [Program 2]:
+        char b[2];
+        static int c = 0;
+        int main() {{
+          return 0;
+        }}
+      [Answer]: The if statement in program 1 checks whether the memory address of b[0] equals c's address.
+                c = 1 will not be executed in program 1, so the two programs always have the same states.
+                The answer is YES.
+    [Program 1]:
+    {program_1_code}
+    [Program 2]:
+    {program_2_code}
+    
+    Please output the answer of whether the two programs are equivalent or not. You should output {true_label} or {false_label} in the end. Let's think step by step.
+TVM:
+  ZERO: |
+    You are here to judge if two CUDA programs are semantically equivalent.
+    Here equivalence means that, when run on the same valid input, the two programs always compute the same mathematical output (neglecting floating point rounding errors).
+   
+    [Program 1]:
+    {program_1_code}
+    [Program 2]:
+    {program_2_code}
+
+    Please only output the answer of whether the two programs are equivalent or not. You should only output {true_label} or {false_label}.
+  ZERO_COT: |
+    You are here to judge if two CUDA programs are semantically equivalent.
+    Here equivalence means that, when run on the same valid input, the two programs always compute the same mathematical output (neglecting floating point rounding errors).
+   
+    [Program 1]:
+    {program_1_code}
+    [Program 2]:
+    {program_2_code}
+
+    Please output the answer of whether the two programs are equivalent or not. You should output {true_label} or {false_label} in the end. Let's think step by step.
+  FEW: |
+    You are here to judge if two CUDA programs are semantically equivalent.
+    Here equivalence means that, when run on the same valid input, the two programs always compute the same mathematical output (neglecting floating point rounding errors).
+
+    [Example 1]:
+      [Program 1]:
+        __global__ void sgemm_naive(int M, int N, int K, float alpha, const float *A,
+                              const float *B, float beta, float *C) {{
+          const uint x = blockIdx.x * blockDim.x + threadIdx.x;
+          const uint y = blockIdx.y * blockDim.y + threadIdx.y;
+
+          if (x < M && y < N) {{
+            float tmp = 0.0;
+            for (int i = 0; i < K; ++i) {{
+              tmp += A[x * K + i] * B[i * N + y];
+            }}
+            C[x * N + y] = alpha * tmp + beta * C[x * N + y];
+          }}
+        }}
+      [Program 2]:
+        __global__ void sgemm_naive(int M, int N, int K, float alpha, const float *A,
+                              const float *B, float beta, float *C) {{
+          const uint x = blockIdx.x * blockDim.x + threadIdx.x;
+          const uint y = blockIdx.y * blockDim.y + threadIdx.y;
+
+          if (x < M && y < N) {{
+            float tmp = 0.0;
+            for (int i = 0; i < K; ++i) {{
+              tmp += A[x * K + i] * B[i * N + y];
+            }}
+            C[x * N + y] = beta * tmp + alpha * C[x * N + y];
+          }}
+        }}
+      [Answer]: NO
+
+    [Example 2]:
+      [Program 1]:
+        __global__ void sgemm_naive(int M, int N, int K, float alpha, const float *A,
+                              const float *B, float beta, float *C) {{
+          const uint x = blockIdx.x * blockDim.x + threadIdx.x;
+          const uint y = blockIdx.y * blockDim.y + threadIdx.y;
+
+          if (x < M && y < N) {{
+            float tmp = 0.0;
+            for (int i = 0; i < K; ++i) {{
+              tmp += A[x * K + i] * B[i * N + y];
+            }}
+            C[x * N + y] = alpha * tmp + beta * C[x * N + y];
+          }}
+        }}
+      [Program 2]:
+        template <const uint BLOCKSIZE>
+        __global__ void sgemm_global_mem_coalesce(int M, int N, int K, float alpha,
+                                                  const float *A, const float *B,
+                                                  float beta, float *C) {{
+          const int cRow = blockIdx.x * BLOCKSIZE + (threadIdx.x / BLOCKSIZE);
+          const int cCol = blockIdx.y * BLOCKSIZE + (threadIdx.x % BLOCKSIZE);
+
+          if (cRow < M && cCol < N) {{
+            float tmp = 0.0;
+            for (int i = 0; i < K; ++i) {{
+              tmp += A[cRow * K + i] * B[i * N + cCol];
+            }}
+            C[cRow * N + cCol] = alpha * tmp + beta * C[cRow * N + cCol];
+          }}
+        }}
+      [Answer]: YES
+
+    [Example 3]:
+      [Program 1]:
+        __global__ void sgemm_naive(int M, int N, int K, float alpha, const float *A,
+                            const float *B, float beta, float *C) {{
+          const uint x = blockIdx.x * blockDim.x + threadIdx.x;
+          const uint y = blockIdx.y * blockDim.y + threadIdx.y;
+
+          if (x < M && y < N) {{
+            float tmp = 0.0;
+            for (int i = 0; i < K; ++i) {{
+              tmp += A[x * K + i] * B[i * N + y];
+            }}
+            C[x * N + y] = alpha * tmp + beta * C[x * N + y];
+          }}
+        }}
+      [Program 2]:
+        template <const int BLOCKSIZE>
+        __global__ void sgemm_shared_mem_block(int M, int N, int K, float alpha,
+                                              const float *A, const float *B,
+                                              float beta, float *C) {{
+          const uint cRow = blockIdx.x;
+          const uint cCol = blockIdx.y;
+
+          __shared__ float As[BLOCKSIZE * BLOCKSIZE];
+          __shared__ float Bs[BLOCKSIZE * BLOCKSIZE];
+
+          const uint threadCol = threadIdx.x % BLOCKSIZE;
+          const uint threadRow = threadIdx.x / BLOCKSIZE;
+
+          A += cRow * BLOCKSIZE * K;
+          B += cCol * BLOCKSIZE;
+          C += cRow * BLOCKSIZE * N + cCol * BLOCKSIZE;
+
+          float tmp = 0.0;
+          for (int bkIdx = 0; bkIdx < K; bkIdx += BLOCKSIZE) {{
+            As[threadRow * BLOCKSIZE + threadCol] = A[threadRow * K + threadCol];
+            Bs[threadRow * BLOCKSIZE + threadCol] = B[threadRow * N + threadCol];
+
+            A += BLOCKSIZE;
+            B += BLOCKSIZE * N;
+
+            for (int dotIdx = 0; dotIdx < BLOCKSIZE; ++dotIdx) {{
+              tmp += As[threadRow * BLOCKSIZE + dotIdx] *
+                    Bs[dotIdx * BLOCKSIZE + threadCol];
+            }}
+          }}
+          C[threadRow * N + threadCol] = alpha * tmp + beta * C[threadRow * N + threadCol];
+        }}
+      [Answer]: NO
+
+    [Example 4]:
+      [Program 1]:
+        __global__ void sgemm_naive(int M, int N, int K, float alpha, const float *A,
+                            const float *B, float beta, float *C) {{
+          const uint x = blockIdx.x * blockDim.x + threadIdx.x;
+          const uint y = blockIdx.y * blockDim.y + threadIdx.y;
+
+          if (x < M && y < N) {{
+            float tmp = 0.0;
+            for (int i = 0; i < K; ++i) {{
+              tmp += A[x * K + i] * B[i * N + y];
+            }}
+            C[x * N + y] = alpha * tmp + beta * C[x * N + y];
+          }}
+        }}
+      [Program 2]:
+        template <const int BLOCKSIZE>
+        __global__ void sgemm_shared_mem_block(int M, int N, int K, float alpha,
+                                              const float *A, const float *B,
+                                              float beta, float *C) {{
+          const uint cRow = blockIdx.x;
+          const uint cCol = blockIdx.y;
+
+          __shared__ float As[BLOCKSIZE * BLOCKSIZE];
+          __shared__ float Bs[BLOCKSIZE * BLOCKSIZE];
+
+          const uint threadCol = threadIdx.x % BLOCKSIZE;
+          const uint threadRow = threadIdx.x / BLOCKSIZE;
+
+          A += cRow * BLOCKSIZE * K;
+          B += cCol * BLOCKSIZE;
+          C += cRow * BLOCKSIZE * N + cCol * BLOCKSIZE;
+
+          float tmp = 0.0;
+          for (int bkIdx = 0; bkIdx < K; bkIdx += BLOCKSIZE) {{
+            As[threadRow * BLOCKSIZE + threadCol] = A[threadRow * K + threadCol];
+            Bs[threadRow * BLOCKSIZE + threadCol] = B[threadRow * N + threadCol];
+
+            __syncthreads();
+            A += BLOCKSIZE;
+            B += BLOCKSIZE * N;
+
+            for (int dotIdx = 0; dotIdx < BLOCKSIZE; ++dotIdx) {{
+              tmp += As[threadRow * BLOCKSIZE + dotIdx] *
+                    Bs[dotIdx * BLOCKSIZE + threadCol];
+            }}
+            __syncthreads();
+          }}
+          C[threadRow * N + threadCol] = alpha * tmp + beta * C[threadRow * N + threadCol];
+        }}
+      [Answer]: YES
+
+    [Program 1]:
+    {program_1_code}
+    [Program 2]:
+    {program_2_code}
+
+    Please only output the answer of whether the two programs are equivalent or not. You should only output {true_label} or {false_label}.
+  FEW_COT: |
+    You are here to judge if two CUDA programs are semantically equivalent.
+    Here equivalence means that, when run on the same valid input, the two programs always compute the same mathematical output (neglecting floating point rounding errors).
+
+    [Example 1]:
+      [Program 1]:
+        __global__ void sgemm_naive(int M, int N, int K, float alpha, const float *A,
+                              const float *B, float beta, float *C) {{
+          const uint x = blockIdx.x * blockDim.x + threadIdx.x;
+          const uint y = blockIdx.y * blockDim.y + threadIdx.y;
+
+          if (x < M && y < N) {{
+            float tmp = 0.0;
+            for (int i = 0; i < K; ++i) {{
+              tmp += A[x * K + i] * B[i * N + y];
+            }}
+            C[x * N + y] = alpha * tmp + beta * C[x * N + y];
+          }}
+        }}
+      [Program 2]:
+        __global__ void sgemm_naive(int M, int N, int K, float alpha, const float *A,
+                              const float *B, float beta, float *C) {{
+          const uint x = blockIdx.x * blockDim.x + threadIdx.x;
+          const uint y = blockIdx.y * blockDim.y + threadIdx.y;
+
+          if (x < M && y < N) {{
+            float tmp = 0.0;
+            for (int i = 0; i < K; ++i) {{
+              tmp += A[x * K + i] * B[i * N + y];
+            }}
+            C[x * N + y] = beta * tmp + alpha * C[x * N + y];
+          }}
+        }}
+      [Answer]: Program 1 computes C = alpha*(A@B) + beta*C, while Program 2 computes C = beta*(A@B) + alpha*C.
+               The answer is NO.
+
+    [Example 2]:
+      [Program 1]:
+        __global__ void sgemm_naive(int M, int N, int K, float alpha, const float *A,
+                              const float *B, float beta, float *C) {{
+          const uint x = blockIdx.x * blockDim.x + threadIdx.x;
+          const uint y = blockIdx.y * blockDim.y + threadIdx.y;
+
+          if (x < M && y < N) {{
+            float tmp = 0.0;
+            for (int i = 0; i < K; ++i) {{
+              tmp += A[x * K + i] * B[i * N + y];
+            }}
+            C[x * N + y] = alpha * tmp + beta * C[x * N + y];
+          }}
+        }}
+      [Program 2]:
+        template <const uint BLOCKSIZE>
+        __global__ void sgemm_global_mem_coalesce(int M, int N, int K, float alpha,
+                                                  const float *A, const float *B,
+                                                  float beta, float *C) {{
+          const int cRow = blockIdx.x * BLOCKSIZE + (threadIdx.x / BLOCKSIZE);
+          const int cCol = blockIdx.y * BLOCKSIZE + (threadIdx.x % BLOCKSIZE);
+
+          if (cRow < M && cCol < N) {{
+            float tmp = 0.0;
+            for (int i = 0; i < K; ++i) {{
+              tmp += A[cRow * K + i] * B[i * N + cCol];
+            }}
+            C[cRow * N + cCol] = alpha * tmp + beta * C[cRow * N + cCol];
+          }}
+        }}
+      [Answer]: Both programs compute C = alpha*(A@B) + beta*C.
+                Program 2 improves performance with global memory coalescing, which does not change computation results.
+                The answer is YES.
+
+    [Example 3]:
+      [Program 1]:
+        __global__ void sgemm_naive(int M, int N, int K, float alpha, const float *A,
+                            const float *B, float beta, float *C) {{
+          const uint x = blockIdx.x * blockDim.x + threadIdx.x;
+          const uint y = blockIdx.y * blockDim.y + threadIdx.y;
+
+          if (x < M && y < N) {{
+            float tmp = 0.0;
+            for (int i = 0; i < K; ++i) {{
+              tmp += A[x * K + i] * B[i * N + y];
+            }}
+            C[x * N + y] = alpha * tmp + beta * C[x * N + y];
+          }}
+        }}
+      [Program 2]:
+        template <const int BLOCKSIZE>
+        __global__ void sgemm_shared_mem_block(int M, int N, int K, float alpha,
+                                              const float *A, const float *B,
+                                              float beta, float *C) {{
+          const uint cRow = blockIdx.x;
+          const uint cCol = blockIdx.y;
+
+          __shared__ float As[BLOCKSIZE * BLOCKSIZE];
+          __shared__ float Bs[BLOCKSIZE * BLOCKSIZE];
+
+          const uint threadCol = threadIdx.x % BLOCKSIZE;
+          const uint threadRow = threadIdx.x / BLOCKSIZE;
+
+          A += cRow * BLOCKSIZE * K;
+          B += cCol * BLOCKSIZE;
+          C += cRow * BLOCKSIZE * N + cCol * BLOCKSIZE;
+
+          float tmp = 0.0;
+          for (int bkIdx = 0; bkIdx < K; bkIdx += BLOCKSIZE) {{
+            As[threadRow * BLOCKSIZE + threadCol] = A[threadRow * K + threadCol];
+            Bs[threadRow * BLOCKSIZE + threadCol] = B[threadRow * N + threadCol];
+
+            A += BLOCKSIZE;
+            B += BLOCKSIZE * N;
+
+            for (int dotIdx = 0; dotIdx < BLOCKSIZE; ++dotIdx) {{
+              tmp += As[threadRow * BLOCKSIZE + dotIdx] *
+                    Bs[dotIdx * BLOCKSIZE + threadCol];
+            }}
+          }}
+          C[threadRow * N + threadCol] = alpha * tmp + beta * C[threadRow * N + threadCol];
+        }}
+      [Answer]: Both programs aim to compute C = alpha*(A@B) + beta*C, but there are two synchronization bugs in Program 2.
+                Before entering the inner loop to compute tmp, there is no guarantee that the cache (As, Bs) is fully populated by all threads.
+                At the end of each iteration of bkIdx, faster threads may fetch the next block into the cache before slower threads are done.
+                The answer is NO.
+
+    [Example 4]:
+      [Program 1]:
+        __global__ void sgemm_naive(int M, int N, int K, float alpha, const float *A,
+                            const float *B, float beta, float *C) {{
+          const uint x = blockIdx.x * blockDim.x + threadIdx.x;
+          const uint y = blockIdx.y * blockDim.y + threadIdx.y;
+
+          if (x < M && y < N) {{
+            float tmp = 0.0;
+            for (int i = 0; i < K; ++i) {{
+              tmp += A[x * K + i] * B[i * N + y];
+            }}
+            C[x * N + y] = alpha * tmp + beta * C[x * N + y];
+          }}
+        }}
+      [Program 2]:
+        template <const int BLOCKSIZE>
+        __global__ void sgemm_shared_mem_block(int M, int N, int K, float alpha,
+                                              const float *A, const float *B,
+                                              float beta, float *C) {{
+          const uint cRow = blockIdx.x;
+          const uint cCol = blockIdx.y;
+
+          __shared__ float As[BLOCKSIZE * BLOCKSIZE];
+          __shared__ float Bs[BLOCKSIZE * BLOCKSIZE];
+
+          const uint threadCol = threadIdx.x % BLOCKSIZE;
+          const uint threadRow = threadIdx.x / BLOCKSIZE;
+
+          A += cRow * BLOCKSIZE * K;
+          B += cCol * BLOCKSIZE;
+          C += cRow * BLOCKSIZE * N + cCol * BLOCKSIZE;
+
+          float tmp = 0.0;
+          for (int bkIdx = 0; bkIdx < K; bkIdx += BLOCKSIZE) {{
+            As[threadRow * BLOCKSIZE + threadCol] = A[threadRow * K + threadCol];
+            Bs[threadRow * BLOCKSIZE + threadCol] = B[threadRow * N + threadCol];
+
+            __syncthreads();
+            A += BLOCKSIZE;
+            B += BLOCKSIZE * N;
+
+            for (int dotIdx = 0; dotIdx < BLOCKSIZE; ++dotIdx) {{
+              tmp += As[threadRow * BLOCKSIZE + dotIdx] *
+                    Bs[dotIdx * BLOCKSIZE + threadCol];
+            }}
+            __syncthreads();
+          }}
+          C[threadRow * N + threadCol] = alpha * tmp + beta * C[threadRow * N + threadCol];
+        }}
+      [Answer]: Both programs aim to compute C = alpha*(A@B) + beta*C.
+                Program 2 loads a chunk of A and a chunk of B from global memory into shared memory.
+                Such shared memory cache-blocking improves performance but does not change the correctness of the computation (no bugs found).
+                The answer is YES.
+
+    [Program 1]:
+    {program_1_code}
+    [Program 2]:
+    {program_2_code}
+
+    Please output the answer of whether the two programs are equivalent or not. You should output {true_label} or {false_label} in the end. Let's think step by step.
+STOKE:
+  ZERO: |
+    You are here to judge if two x86-64 programs are semantically equivalent.
+    Here equivalence means that, given any input bits in the register {def_in}, the two programs always have the same bits in register {live_out}. Differences in other registers do not matter for equivalence checking.
+
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please only output the answer of whether the two programs are equivalent or not. You should only output {true_label} or {false_label}.
+  ZERO_COT: |
+    You are here to judge if two x86-64 programs are semantically equivalent.
+    Here equivalence means that, given any input bits in the register {def_in}, the two programs always have the same bits in register {live_out}. Differences in other registers do not matter for equivalence checking.
+
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please output the answer of whether the two programs are equivalent or not. You should output {true_label} or {false_label} in the end. Let's think step by step.
+  FEW: |
+    You are here to judge if two x86-64 programs are semantically equivalent.
+    Here equivalence means that, given any input bits in the register {def_in}, the two programs always have the same bits in register {live_out}. Differences in other registers do not matter for equivalence checking.
+
+    [Example 1]:
+      In this example, the input register is %rdi, and output register is %rdi.
+      [Program 1]:
+        movq -8(%rsp), %rdi
+        .L4:
+        sall (%rdi)
+        movq 8(%rdi), %rdi
+        .L6:
+        testq %rdi, %rdi
+        jne .L4
+      [Program 2]:
+        .L4:
+        movq -8(%rsp), %rdi
+        sall (%rdi)
+        movq 8(%rdi), %rdi
+        movq %rdi, -8(%rsp)
+        .L6:
+        movq -8(%rsp), %rdi
+        testq %rdi, %rdi
+        jne .L4
+      [Answer]: YES
+    
+    [Example 2]:
+      In this example, the input register is %rdi, and output register is %rdi.
+      [Program 1]:
+        movq -8(%rsp), %rdi
+        .L4:
+        sall (%rdi)
+        movq 8(%rdi), %rdi
+        .L6:
+        testq %rdi, %rdi
+        jne .L4
+      [Program 2]:
+        .L4:
+        movq -8(%rsp), %rdi
+        sall (%rdi)
+        movq 8(%rdi), %rdi
+        movq %rdi, -8(%rsp)
+        .L6:
+        movq -8(%rsp), %rdi
+        addq $1, %rdi
+        testq %rdi, %rdi
+        jne .L4
+      [Answer]: NO
+    
+    [Example 3]:
+      In this example, the input register is %rdi, and output register is %rax.
+      [Program 1]:
+          .text
+          .globl _Z6popcntm
+          .type _Z6popcntm, @function
+        _Z6popcntm:
+          xorl   %eax,%eax
+          testq  %rdi,%rdi
+          je     .L_4005b0
+          nop
+        .L_4005a0:
+          movq   %rdi,%rdx
+          andl   $0x1,%edx
+          addq   %rdx,%rax
+          shrq   $0x1,%rdi
+          jne    .L_4005a0
+          retq
+        .L_4005b0:
+          retq
+          nop
+          nop
+          .size _Z6popcntm, .-_Z6popcntm
+      [Program 2]:
+          .text
+          .globl _Z6popcntm
+          .type _Z6popcntm @function
+        _Z6popcntm:
+          popcnt %rdi, %rax
+          retq
+          .size _Z6popcntm, .-_Z6popcntm
+      [Answer]: YES
+    
+    [Example 4]:
+      In this example, the input register is %rdi, and output register is %rax.
+      [Program 1]:
+        .text
+        .globl _Z6popcntm
+        .type _Z6popcntm, @function
+        _Z6popcntm:
+          xorl   %eax, %eax
+          testq  %rdi, %rdi
+          je     .L_4005b0
+          nop
+        .L_4005a0:
+          movq   %rdi, %rdx
+          andl   $0x1, %edx
+          addq   %rdx, %rax
+          addq   $1, %rax
+          shrq   $0x1, %rdi
+          jne    .L_4005a0
+          retq
+        .L_4005b0:
+          retq
+          nop
+          nop
+          .size _Z6popcntm, .-_Z6popcntm
+      [Program 2]:
+          .text
+            .globl _Z6popcntm
+            .type _Z6popcntm @function
+          _Z6popcntm:
+            popcnt %rdi, %rax
+            retq
+            .size _Z6popcntm, .-_Z6popcntm
+      [Answer]: NO
+
+    The input register is {def_in}, and the output register is {live_out}.
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please only output the answer of whether the two programs are equivalent or not. You should only output {true_label} or {false_label}.
+  FEW_COT: |
+    You are here to judge if two x86-64 programs are semantically equivalent.
+    Here equivalence means that, given any input bits in the register {def_in}, the two programs always have the same bits in register {live_out}. Differences in other registers do not matter for equivalence checking.
+
+    [Example 1]:
+      In this example, the input register is %rdi, and output register is %rdi.
+      [Program 1]:
+        movq -8(%rsp), %rdi
+        .L4:
+        sall (%rdi)
+        movq 8(%rdi), %rdi
+        .L6:
+        testq %rdi, %rdi
+        jne .L4
+      [Program 2]:
+        .L4:
+        movq -8(%rsp), %rdi
+        sall (%rdi)
+        movq 8(%rdi), %rdi
+        movq %rdi, -8(%rsp)
+        .L6:
+        movq -8(%rsp), %rdi
+        testq %rdi, %rdi
+        jne .L4
+      [Answer]: The additional instructions in Program 2 are: movq %rdi, -8(%rsp) and movq -8(%rsp), %rdi.
+                Program 2 stores the updated %rdi value back into -8(%rsp) after each iteration and reloads it before the next iteration.
+                But this does not affect the value of %rdi.
+                The answer is YES.
+    
+    [Example 2]:
+      In this example, the input register is %rdi, and output register is %rdi.
+      [Program 1]:
+        movq -8(%rsp), %rdi
+        .L4:
+        sall (%rdi)
+        movq 8(%rdi), %rdi
+        .L6:
+        testq %rdi, %rdi
+        jne .L4
+      [Program 2]:
+        .L4:
+        movq -8(%rsp), %rdi
+        sall (%rdi)
+        movq 8(%rdi), %rdi
+        movq %rdi, -8(%rsp)
+        .L6:
+        movq -8(%rsp), %rdi
+        addq $1, %rdi
+        testq %rdi, %rdi
+        jne .L4
+      [Answer]: The additional instruction from Program 2 includes addq $1, %rdi, which increments %rdi by 1 before the test condition.
+                The two programs do not produce the same result for %rdi.
+                The answer is NO.
+    
+    [Example 3]:
+      In this example, the input register is %rdi, and output register is %rax.
+      [Program 1]:
+          .text
+          .globl _Z6popcntm
+          .type _Z6popcntm, @function
+        _Z6popcntm:
+          xorl   %eax,%eax
+          testq  %rdi,%rdi
+          je     .L_4005b0
+          nop
+        .L_4005a0:
+          movq   %rdi,%rdx
+          andl   $0x1,%edx
+          addq   %rdx,%rax
+          shrq   $0x1,%rdi
+          jne    .L_4005a0
+          retq
+        .L_4005b0:
+          retq
+          nop
+          nop
+          .size _Z6popcntm, .-_Z6popcntm
+      [Program 2]:
+          .text
+          .globl _Z6popcntm
+          .type _Z6popcntm @function
+        _Z6popcntm:
+          popcnt %rdi, %rax
+          retq
+          .size _Z6popcntm, .-_Z6popcntm
+      [Answer]: Both programs compute the population count (the number of 1s in a number's binary representation) of %rdi and store the result in %rax.
+                The answer is YES.
+    
+    [Example 4]:
+      In this example, the input register is %rdi, and output register is %rax.
+      [Program 1]:
+        .text
+        .globl _Z6popcntm
+        .type _Z6popcntm, @function
+        _Z6popcntm:
+          xorl   %eax, %eax
+          testq  %rdi, %rdi
+          je     .L_4005b0
+          nop
+        .L_4005a0:
+          movq   %rdi, %rdx
+          andl   $0x1, %edx
+          addq   %rdx, %rax
+          addq   $1, %rax
+          shrq   $0x1, %rdi
+          jne    .L_4005a0
+          retq
+        .L_4005b0:
+          retq
+          nop
+          nop
+          .size _Z6popcntm, .-_Z6popcntm
+      [Program 2]:
+          .text
+            .globl _Z6popcntm
+            .type _Z6popcntm @function
+          _Z6popcntm:
+            popcnt %rdi, %rax
+            retq
+            .size _Z6popcntm, .-_Z6popcntm
+      [Answer]: The instruction of addq $1, %rax in Program 1 introduces a discrepancy by adding the number of loop iterations to the output register.
+                Program 2 simply computes the population count, but Program 1 adds an extra increment for each bit in %rdi.
+                The answer is NO.
+
+    The input register is {def_in}, and the output register is {live_out}.
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please output the answer of whether the two programs are equivalent or not. You should output {true_label} or {false_label} in the end. Let's think step by step.
+OJ_V:
+  ZERO: |
+    You are here to judge if two Python programs are semantically equivalent.
+    You will be given [Problem Description], [Program 1] and [Program 2].
+    Here equivalence means that, given any valid input under the problem description, the two programs will always give the same output.
+
+    [Problem Description]:
+    {problem_html}
+
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please only output the answer of whether the two programs are equivalent or not. You should only output {true_label} or {false_label}.
+  ZERO_COT: |
+    You are here to judge if two Python programs are semantically equivalent.
+    You will be given [Problem Description], [Program 1] and [Program 2].
+    Here equivalence means that, given any valid input under the problem description, the two programs will always give the same output.
+
+    [Problem Description]:
+    {problem_html}
+
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please output the answer of whether the two programs are equivalent or not. You should output {true_label} or {false_label} in the end. Let's think step by step.
+  FEW: |
+    You are here to judge if two Python programs are semantically equivalent.
+    You will be given [Problem Description], [Program 1] and [Program 2].
+    Here equivalence means that, given any valid input under the problem description, the two programs will always give the same output.
+
+    [Example 1]:
+      [Problem Description]:
+        Given a single line of input containing integers separated by spaces, sort the integers in ascending order and print them in a single line separated by spaces.
+        Input: A single line containing integers A[i] (-10^6 <= A[i] <= 10^6, 1 <= n <= 10^6).
+        Output: A single line of integers sorted in ascending order.
+        Example Input:
+        4 2 5 1 3
+        Example Output:
+        1 2 3 4 5
+      [Program 1]:
+        nums = list(map(int, input().split()))
+        sorted_nums = sorted(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Program 2]:
+        random_var1 = list(map(int, input().split()))
+        random_var2 = sorted(random_var1)
+        print(" ".join(map(str, random_var2)))
+      [Answer]: YES
+    
+    [Example 2]:
+      [Problem Description]:
+        Same as Example 1.
+      [Program 1]:
+        nums = list(map(int, input().split()))
+        sorted_nums = sorted(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Program 2]:
+        nums = list(map(int, input().split()))
+        sorted_nums = nums.sort()
+        print(" ".join(map(str, sorted_nums)))
+      [Answer]: NO
+    
+    [Example 3]:
+      [Problem Description]:
+        Given a list of integers, remove all duplicate values while maintaining the order of their first appearance and print the resulting list in a single line, separated by spaces.
+        Input: A single line containing integers A[i] (-10^6 <= A[i] <= 10^6, 1 <= n <= 10^5).
+        Output: A single line containing the integers from the input with duplicates removed, in the order of their first appearance.
+        Example Input:
+        4 5 4 2 5 1 3
+        Example Output:
+        4 5 2 1 3
+      [Program 1]:
+        nums = list(map(int, input().split()))
+        unique_nums = []
+        for num in nums:
+            if num not in unique_nums:
+                unique_nums.append(num)
+        print(" ".join(map(str, unique_nums)))
+      [Program 2]:
+        random_var1 = list(map(int, input().split()))
+        random_var2 = []
+        for random_var3 in random_var1:
+            if random_var3 not in random_var2:
+                random_var2.append(random_var3)
+        print(" ".join(map(str, random_var2)))
+      [Answer]: YES
+    
+    [Example 4]:
+      [Problem Description]:
+        Same as Example 3.
+      [Program 1]:
+        nums = list(map(int, input().split()))
+        unique_nums = []
+        for num in nums:
+            if num not in unique_nums:
+                unique_nums.append(num)
+        print(" ".join(map(str, unique_nums)))
+      [Program 2]:
+        nums = list(map(int, input().split()))
+        unique_nums = []
+        for num in nums:
+            if num in unique_nums:
+                unique_nums.append(num)
+        print(" ".join(map(str, unique_nums)))
+      [Answer]: NO
+    
+    [Problem Description]:
+    {problem_html}
+
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please only output the answer of whether the two programs are equivalent or not. You should only output {true_label} or {false_label}.
+    
+  FEW_COT: |
+    You are here to judge if two Python programs are semantically equivalent.
+    You will be given [Problem Description], [Program 1] and [Program 2].
+    Here equivalence means that, given any valid input under the problem description, the two programs will always give the same output.
+
+    [Example 1]:
+      [Problem Description]:
+        Given a single line of input containing integers separated by spaces, sort the integers in ascending order and print them in a single line separated by spaces.
+        Input: A single line containing integers A[i] (-10^6 <= A[i] <= 10^6, 1 <= n <= 10^6).
+        Output: A single line of integers sorted in ascending order.
+        Example Input:
+        4 2 5 1 3
+        Example Output:
+        1 2 3 4 5
+      [Program 1]:
+        nums = list(map(int, input().split()))
+        sorted_nums = sorted(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Program 2]:
+        random_var1 = list(map(int, input().split()))
+        random_var2 = sorted(random_var1)
+        print(" ".join(map(str, random_var2)))
+      [Answer]: The only difference is in variable names, which do not affect the logic or output of the program.
+                The answer is YES.
+    
+    [Example 2]:
+      [Problem Description]:
+        Same as Example 1.
+      [Program 1]:
+        nums = list(map(int, input().split()))
+        sorted_nums = sorted(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Program 2]:
+        nums = list(map(int, input().split()))
+        sorted_nums = nums.sort()
+        print(" ".join(map(str, sorted_nums)))
+      [Answer]: Program 1 sorts the integers in the correct way. In Program 2, nums.sort() modifies the list in place and returns None. Program 2 will trigger a TypeError.
+                The answer is NO.
+    
+    [Example 3]:
+      [Problem Description]:
+        Given a list of integers, remove all duplicate values while maintaining the order of their first appearance and print the resulting list in a single line, separated by spaces.
+        Input: A single line containing integers A[i] (-10^6 <= A[i] <= 10^6, 1 <= n <= 10^5).
+        Output: A single line containing the integers from the input with duplicates removed, in the order of their first appearance.
+        Example Input:
+        4 5 4 2 5 1 3
+        Example Output:
+        4 5 2 1 3
+      [Program 1]:
+        nums = list(map(int, input().split()))
+        unique_nums = []
+        for num in nums:
+            if num not in unique_nums:
+                unique_nums.append(num)
+        print(" ".join(map(str, unique_nums)))
+      [Program 2]:
+        random_var1 = list(map(int, input().split()))
+        random_var2 = []
+        for random_var3 in random_var1:
+            if random_var3 not in random_var2:
+                random_var2.append(random_var3)
+        print(" ".join(map(str, random_var2)))
+      [Answer]: The only difference is in variable names, which do not affect the logic or output of the program.
+                The answer is YES.
+    
+    [Example 4]:
+      [Problem Description]:
+        Same as Example 3.
+      [Program 1]:
+        nums = list(map(int, input().split()))
+        unique_nums = []
+        for num in nums:
+            if num not in unique_nums:
+                unique_nums.append(num)
+        print(" ".join(map(str, unique_nums)))
+      [Program 2]:
+        nums = list(map(int, input().split()))
+        unique_nums = []
+        for num in nums:
+            if num in unique_nums:
+                unique_nums.append(num)
+        print(" ".join(map(str, unique_nums)))
+      [Answer]: Program 1 correctly appends unique values to unique_nums by checking if num not in unique_nums.
+                Program 2 is incorrect because it uses if num in unique_nums, causing only duplicates to be appended to the list.
+                The answer is NO.
+    
+    [Problem Description]:
+    {problem_html}
+
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please output the answer of whether the two programs are equivalent or not. You should output {true_label} or {false_label} in the end. Let's think step by step.
+OJ_A:
+  ZERO: |
+    You are here to judge if two Python programs are semantically equivalent.
+    You will be given [Problem Description], [Program 1] and [Program 2].
+    Here equivalence means that, given any valid input under the problem description, the two programs will always give the same output.
+
+    [Problem Description]:
+    {problem_html}
+
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please only output the answer of whether the two programs are equivalent or not. You should only output {true_label} or {false_label}.
+  ZERO_COT: |
+    You are here to judge if two Python programs are semantically equivalent.
+    You will be given [Problem Description], [Program 1] and [Program 2].
+    Here equivalence means that, given any valid input under the problem description, the two programs will always give the same output.
+
+    [Problem Description]:
+    {problem_html}
+
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please output the answer of whether the two programs are equivalent or not. You should output {true_label} or {false_label} in the end. Let's think step by step.
+  FEW: |
+    You are here to judge if two Python programs are semantically equivalent.
+    You will be given [Problem Description], [Program 1] and [Program 2].
+    Here equivalence means that, given any valid input under the problem description, the two programs will always give the same output.
+
+    [Example 1]:
+      [Problem Description]:
+        Given a single line of input containing integers separated by spaces, sort the integers in ascending order and print them in a single line separated by spaces.
+        Input: A single line containing integers A[i] (-10^6 <= A[i] <= 10^6, 1 <= n <= 10^6).
+        Output: A single line of integers sorted in ascending order.
+        Example Input:
+        4 2 5 1 3
+        Example Output:
+        1 2 3 4 5
+      [Program 1]:
+        def bubble_sort(arr):
+            n = len(arr)
+            for i in range(n - 1):
+                for j in range(n - 1 - i):
+                    if arr[j] > arr[j + 1]:
+                        arr[j], arr[j + 1] = arr[j + 1], arr[j]
+            return arr
+
+        nums = list(map(int, input().split()))
+        sorted_nums = bubble_sort(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Program 2]:
+        def insertion_sort(arr):
+            for i in range(1, len(arr)):
+                key = arr[i]
+                j = i - 1
+                while j >= 0 and arr[j] > key:
+                    arr[j + 1] = arr[j]
+                    j -= 1
+                arr[j + 1] = key
+            return arr
+
+        nums = list(map(int, input().split()))
+        sorted_nums = insertion_sort(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Answer]: YES
+    
+    [Example 2]:
+      [Problem Description]:
+        Same as Example 1.
+      [Program 1]:
+        Same as Program 1 from Example 1.
+      [Program 2]:
+        def insertion_sort(arr):
+            for i in range(1, len(arr)):
+                key = arr[i]
+                j = i - 1
+                while j >= 0 and arr[j] < key:
+                    arr[j + 1] = arr[j]
+                    j -= 1
+                arr[j + 1] = key
+            return arr
+
+        nums = list(map(int, input().split()))
+        sorted_nums = insertion_sort(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Answer]: NO
+    
+    [Example 3]:
+      [Problem Description]:
+        Same as Example 1.
+      [Program 1]:
+        def bubble_sort(arr):
+            n = len(arr)
+            for i in range(n - 1):
+                for j in range(n - 1 - i):
+                    if arr[j] < arr[j + 1]:  
+                        arr[j], arr[j + 1] = arr[j + 1], arr[j]
+            return arr
+
+        nums = list(map(int, input().split()))
+        sorted_nums = bubble_sort(nums)
+        print(" ".join(map(str, sorted_nums)))
+
+      [Program 2]:
+        Same as Program 2 from Example 1.
+      [Answer]: NO
+    
+    [Example 4]:
+      [Problem Description]:
+        Same as Example 1.
+      [Program 1]:
+        Same as Program 1 from Example 1.
+      [Program 2]:
+        nums = list(map(int, input().split()))
+        sorted_nums = sorted(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Answer]: YES
+    
+    [Problem Description]:
+    {problem_html}
+
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please only output the answer of whether the two programs are equivalent or not. You should only output {true_label} or {false_label}.
+  FEW_COT: |
+    You are here to judge if two Python programs are semantically equivalent.
+    You will be given [Problem Description], [Program 1] and [Program 2].
+    Here equivalence means that, given any valid input under the problem description, the two programs will always give the same output.
+
+    [Example 1]:
+      [Problem Description]:
+        Given a single line of input containing integers separated by spaces, sort the integers in ascending order and print them in a single line separated by spaces.
+        Input: A single line containing integers A[i] (-10^6 <= A[i] <= 10^6, 1 <= n <= 10^6).
+        Output: A single line of integers sorted in ascending order.
+        Example Input:
+        4 2 5 1 3
+        Example Output:
+        1 2 3 4 5
+      [Program 1]:
+        def bubble_sort(arr):
+            n = len(arr)
+            for i in range(n - 1):
+                for j in range(n - 1 - i):
+                    if arr[j] > arr[j + 1]:
+                        arr[j], arr[j + 1] = arr[j + 1], arr[j]
+            return arr
+
+        nums = list(map(int, input().split()))
+        sorted_nums = bubble_sort(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Program 2]:
+        def insertion_sort(arr):
+            for i in range(1, len(arr)):
+                key = arr[i]
+                j = i - 1
+                while j >= 0 and arr[j] > key:
+                    arr[j + 1] = arr[j]
+                    j -= 1
+                arr[j + 1] = key
+            return arr
+
+        nums = list(map(int, input().split()))
+        sorted_nums = insertion_sort(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Answer]: Program 1 is bubble sort, and Program 2 is insertion sort.
+                The answer is YES.
+    
+    [Example 2]:
+      [Problem Description]:
+        Same as Example 1.
+      [Program 1]:
+        Same as Program 1 from Example 1.
+      [Program 2]:
+        def insertion_sort(arr):
+            for i in range(1, len(arr)):
+                key = arr[i]
+                j = i - 1
+                while j >= 0 and arr[j] < key:
+                    arr[j + 1] = arr[j]
+                    j -= 1
+                arr[j + 1] = key
+            return arr
+
+        nums = list(map(int, input().split()))
+        sorted_nums = insertion_sort(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Answer]: Program 1 is bubble sort, and Program 2 has a bug (the loop condition incorrectly uses arr[j] < key instead of arr[j] > key).
+                The answer is NO.
+    
+    [Example 3]:
+      [Problem Description]:
+        Same as Example 1.
+      [Program 1]:
+        def bubble_sort(arr):
+            n = len(arr)
+            for i in range(n - 1):
+                for j in range(n - 1 - i):
+                    if arr[j] < arr[j + 1]:  
+                        arr[j], arr[j + 1] = arr[j + 1], arr[j]
+            return arr
+
+        nums = list(map(int, input().split()))
+        sorted_nums = bubble_sort(nums)
+        print(" ".join(map(str, sorted_nums)))
+
+      [Program 2]:
+        Same as Program 2 from Example 1.
+      [Answer]: Program 1 has a bug for bubble sort (the comparison is reversed, causing incorrect swaps).
+                The answer is NO.
+    
+    [Example 4]:
+      [Problem Description]:
+        Same as Example 1.
+      [Program 1]:
+        Same as Program 1 from Example 1.
+      [Program 2]:
+        nums = list(map(int, input().split()))
+        sorted_nums = sorted(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Answer]: Program 1 is bubble sort, and Program 2 uses Python's built-in sorting implementation.
+                The answer is YES.
+    
+    [Problem Description]:
+    {problem_html}
+
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please output the answer of whether the two programs are equivalent or not. You should output {true_label} or {false_label} in the end. Let's think step by step.
+OJ_VA:
+  ZERO: |
+    You are here to judge if two Python programs are semantically equivalent.
+    You will be given [Problem Description], [Program 1] and [Program 2].
+    Here equivalence means that, given any valid input under the problem description, the two programs will always give the same output.
+
+    [Problem Description]:
+    {problem_html}
+
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please only output the answer of whether the two programs are equivalent or not. You should only output {true_label} or {false_label}.
+  ZERO_COT: |
+    You are here to judge if two Python programs are semantically equivalent.
+    You will be given [Problem Description], [Program 1] and [Program 2].
+    Here equivalence means that, given any valid input under the problem description, the two programs will always give the same output.
+
+    [Problem Description]:
+    {problem_html}
+
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please output the answer of whether the two programs are equivalent or not. You should output {true_label} or {false_label} in the end. Let's think step by step.
+  FEW: |
+    You are here to judge if two Python programs are semantically equivalent.
+    You will be given [Problem Description], [Program 1] and [Program 2].
+    Here equivalence means that, given any valid input under the problem description, the two programs will always give the same output.
+
+    [Example 1]:
+      [Problem Description]:
+        Given a single line of input containing integers separated by spaces, sort the integers in ascending order and print them in a single line separated by spaces.
+        Input: A single line containing integers A[i] (-10^6 <= A[i] <= 10^6, 1 <= n <= 10^6).
+        Output: A single line of integers sorted in ascending order.
+        Example Input:
+        4 2 5 1 3
+        Example Output:
+        1 2 3 4 5
+      [Program 1]:
+        def bubble_sort(arr):
+            n = len(arr)
+            for i in range(n - 1):
+                for j in range(n - 1 - i):
+                    if arr[j] > arr[j + 1]:
+                        arr[j], arr[j + 1] = arr[j + 1], arr[j]
+            return arr
+
+        nums = list(map(int, input().split()))
+        sorted_nums = bubble_sort(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Program 2]:
+        def random_sort(rand_var1):
+            for rand_var2 in range(1, len(rand_var1)):
+                rand_var3 = rand_var1[rand_var2]
+                rand_var4 = rand_var2 - 1
+                while rand_var4 >= 0 and rand_var1[rand_var4] > rand_var3:
+                    rand_var1[rand_var4 + 1] = rand_var1[rand_var4]
+                    rand_var4 -= 1
+                rand_var1[rand_var4 + 1] = rand_var3
+            return rand_var1
+
+        rand_input = list(map(int, input().split()))
+        rand_output = random_sort(rand_input)
+        print(" ".join(map(str, rand_output)))
+      [Answer]: YES
+    
+    [Example 2]:
+      [Problem Description]:
+        Same as Example 1.
+      [Program 1]:
+        Same as Program 1 from Example 1.
+      [Program 2]:
+        def insertion_sort(rand_var1):
+            for i in range(1, len(rand_var1)):
+                key = rand_var1[i]
+                j = i - 1
+                while j >= 0 and rand_var1[j] < key:
+                    rand_var1[j + 1] = rand_var1[j]
+                    j -= 1
+                rand_var1[j + 1] = key
+            return rand_var1
+
+        nums = list(map(int, input().split()))
+        sorted_nums = insertion_sort(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Answer]: NO
+    
+    [Example 3]:
+      [Problem Description]:
+        Same as Example 1.
+      [Program 1]:
+        def rand_alg(rand_var):
+            n = len(rand_var)
+            for i in range(n - 1):
+                for j in range(n - 1 - i):
+                    if rand_var[j] < rand_var[j + 1]:  
+                        rand_var[j], rand_var[j + 1] = rand_var[j + 1], rand_var[j]
+            return rand_var
+
+        nums = list(map(int, input().split()))
+        sorted_nums = rand_alg(nums)
+        print(" ".join(map(str, sorted_nums)))
+
+      [Program 2]:
+        Same as Program 2 from Example 1.
+      [Answer]: NO
+    
+    [Example 4]:
+      [Problem Description]:
+        Same as Example 1.
+      [Program 1]:
+        Same as Program 1 from Example 1.
+      [Program 2]:
+        nums = list(map(int, input().split()))
+        sorted_nums = sorted(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Answer]: YES
+
+    [Problem Description]:
+    {problem_html}
+
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please only output the answer of whether the two programs are equivalent or not. You should only output {true_label} or {false_label}.
+  FEW_COT: |
+    You are here to judge if two Python programs are semantically equivalent.
+    You will be given [Problem Description], [Program 1] and [Program 2].
+    Here equivalence means that, given any valid input under the problem description, the two programs will always give the same output.
+
+    [Example 1]:
+      [Problem Description]:
+        Given a single line of input containing integers separated by spaces, sort the integers in ascending order and print them in a single line separated by spaces.
+        Input: A single line containing integers A[i] (-10^6 <= A[i] <= 10^6, 1 <= n <= 10^6).
+        Output: A single line of integers sorted in ascending order.
+        Example Input:
+        4 2 5 1 3
+        Example Output:
+        1 2 3 4 5
+      [Program 1]:
+        def bubble_sort(arr):
+            n = len(arr)
+            for i in range(n - 1):
+                for j in range(n - 1 - i):
+                    if arr[j] > arr[j + 1]:
+                        arr[j], arr[j + 1] = arr[j + 1], arr[j]
+            return arr
+
+        nums = list(map(int, input().split()))
+        sorted_nums = bubble_sort(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Program 2]:
+        def random_sort(rand_var1):
+            for rand_var2 in range(1, len(rand_var1)):
+                rand_var3 = rand_var1[rand_var2]
+                rand_var4 = rand_var2 - 1
+                while rand_var4 >= 0 and rand_var1[rand_var4] > rand_var3:
+                    rand_var1[rand_var4 + 1] = rand_var1[rand_var4]
+                    rand_var4 -= 1
+                rand_var1[rand_var4 + 1] = rand_var3
+            return rand_var1
+
+        rand_input = list(map(int, input().split()))
+        rand_output = random_sort(rand_input)
+        print(" ".join(map(str, rand_output)))
+      [Answer]: Program 1 is bubble sort, and Program 2 is insertion sort (though the variable names are randomized).
+                The answer is YES.
+    
+    [Example 2]:
+      [Problem Description]:
+        Same as Example 1.
+      [Program 1]:
+        Same as Program 1 from Example 1.
+      [Program 2]:
+        def insertion_sort(rand_var1):
+            for i in range(1, len(rand_var1)):
+                key = rand_var1[i]
+                j = i - 1
+                while j >= 0 and rand_var1[j] < key:
+                    rand_var1[j + 1] = rand_var1[j]
+                    j -= 1
+                rand_var1[j + 1] = key
+            return rand_var1
+
+        nums = list(map(int, input().split()))
+        sorted_nums = insertion_sort(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Answer]: Program 1 is bubble sort, and Program 2 has a bug (the loop condition incorrectly uses rand_var1[j] < key instead of rand_var1[j] > key).
+                The answer is NO.
+    
+    [Example 3]:
+      [Problem Description]:
+        Same as Example 1.
+      [Program 1]:
+        def rand_alg(rand_var):
+            n = len(rand_var)
+            for i in range(n - 1):
+                for j in range(n - 1 - i):
+                    if rand_var[j] < rand_var[j + 1]:  
+                        rand_var[j], rand_var[j + 1] = rand_var[j + 1], rand_var[j]
+            return rand_var
+
+        nums = list(map(int, input().split()))
+        sorted_nums = rand_alg(nums)
+        print(" ".join(map(str, sorted_nums)))
+
+      [Program 2]:
+        Same as Program 2 from Example 1.
+      [Answer]: Program 1 has a bug for bubble sort (the comparison is reversed, causing incorrect swaps).
+                The answer is NO.
+    
+    [Example 4]:
+      [Problem Description]:
+        Same as Example 1.
+      [Program 1]:
+        Same as Program 1 from Example 1.
+      [Program 2]:
+        nums = list(map(int, input().split()))
+        sorted_nums = sorted(nums)
+        print(" ".join(map(str, sorted_nums)))
+      [Answer]: Program 1 is bubble sort, and Program 2 uses Python's built-in sorting implementation.
+                The answer is YES.
+    
+    [Problem Description]:
+    {problem_html}
+
+    [Program 1]:
+    {program_1_code}
+
+    [Program 2]:
+    {program_2_code}
+
+    Please output the answer of whether the two programs are equivalent or not. You should output {true_label} or {false_label} in the end. Let's think step by step.

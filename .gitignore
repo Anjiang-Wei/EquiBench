@@ -94,12 +94,6 @@ ipython_config.py
 #   install all needed dependencies.
 #Pipfile.lock
 
-# UV
-#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#uv.lock
-
 # poetry
 #   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
@@ -167,5 +161,43 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# PyPI configuration file
-.pypirc
+# api keys
+.env
+
+# mac system
+*.DS_Store
+
+# original
+original
+
+# result
+old_result
+result
+
+# stoke
+original/stoke/original
+original/stoke/result_step1
+original/stoke/result_step2
+
+# dce
+original/dce/latest
+original/dce/**/*.html
+
+# tvm
+original/tvm/data/*/*.cu
+original/tvm/few_shot_examples/*/*.cu
+original/tvm/data
+original/tvm/**/*.html
+
+
+# oj
+
+original/oj/Project_CodeNet/
+# oj eval intermediate data for each problem
+original/oj/eval_output*/p*.json
+
+# hintrc
+.hintrc
+
+/data
+datasets
