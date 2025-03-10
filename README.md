@@ -161,3 +161,5 @@ python step2_eval.py data result/eval \
     deepseek-ai/DeepSeek-R1
     deepseek-ai/DeepSeek-V3
     ```
+
+  - Other OpenAI, Anthorpic and together.ai models
