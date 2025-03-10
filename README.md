@@ -4,6 +4,7 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2502.12466-b31b1b.svg)](https://arxiv.org/abs/2502.12466)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python](https://img.shields.io/badge/python-3.12+-yellow.svg)](https://www.python.org/downloads/)
+[![HuggingFace](https://img.shields.io/badge/🤗%20Hugging%20Face-EquiBench_Datasets-orange.svg)](https://huggingface.co/datasets/anjiangwei/EquiBench-Datasets)
 
 ## Overview
 
@@ -25,10 +26,11 @@ EquiBench is a comprehensive benchmark designed to evaluate the code reasoning c
   - [Step 1: Downloading Datasets](#step-1-downloading-datasets)
   - [Step 2: Running Evaluations](#step-2-running-evaluations)
 - Details
-  - [Dataset Structure](#dataset-structure)
   - [Supported Prompt Types](#supported-prompt-types)
   - [Supported Models](#supported-models)
-  - [Evaluation Results](#evaluation-results)
+  - [Supported Categories](#supported-categories)
+- [HuggingFace Dataset](#huggingface-dataset)
+- [Evaluation Results](#evaluation-results)
 - [Citation](#citation)
 - [License](#license)
 
@@ -122,6 +124,8 @@ When returning to work on EquiBench:
     python step1_data.py data
     ```
 
+   This will download all 2400 program pairs from the [EquiBench-Datasets](https://huggingface.co/datasets/anjiangwei/EquiBench-Datasets) repository on HuggingFace.
+
 ## Step 2: Running Evaluations
 
 Execute the evaluation script with your desired configuration. The example below runs a zero-shot evaluation on three different models with a sample limit of 1 for each category:
@@ -160,7 +164,7 @@ python step2_eval.py data result/eval --prompt_types ZERO_COT --models openai/gp
 python step2_eval.py data custom_results --prompt_types ZERO FEW
 ```
 
-## Dataset Structure
+## Supported Categories
 
 EquiBench contains 2400 pairs of programs across six distinct categories of code equivalence tasks:
 
@@ -236,6 +240,44 @@ deepseek-ai/DeepSeek-V3
 ```
 
 Additional models from OpenAI, Anthropic, and together.ai platforms are also supported.
+
+## HuggingFace Dataset
+
+The EquiBench dataset is hosted on HuggingFace as [anjiangwei/EquiBench-Datasets](https://huggingface.co/datasets/anjiangwei/EquiBench-Datasets).
+
+### Dataset Statistics
+
+| Category | Language | Equivalent Pairs | Inequivalent Pairs | Total |
+|----------|----------|------------------|-------------------|-------|
+| DCE      | C        | 200              | 200               | 400   |
+| STOKE    | x86-64   | 200              | 200               | 400   |
+| TVM      | CUDA     | 200              | 200               | 400   |
+| OJ_A     | Python   | 200              | 200               | 400   |
+| OJ_V     | Python   | 200              | 200               | 400   |
+| OJ_VA    | Python   | 200              | 200               | 400   |
+| **Total**|          | **1200**         | **1200**          | **2400**|
+
+### Direct Access via HuggingFace Datasets Library
+
+You can directly access the dataset using the HuggingFace `datasets` library:
+
+```python
+from datasets import load_dataset
+
+# Define dataset path
+hf_path = "anjiangwei/EquiBench-Datasets"
+
+# Load specific categories
+dce_dataset = load_dataset(path=hf_path, name="DCE")
+stoke_dataset = load_dataset(path=hf_path, name="STOKE")
+tvm_dataset = load_dataset(path=hf_path, name="TVM")
+oj_a_dataset = load_dataset(path=hf_path, name="OJ_A")
+oj_v_dataset = load_dataset(path=hf_path, name="OJ_V")
+oj_va_dataset = load_dataset(path=hf_path, name="OJ_VA")
+
+# Example: Access the first pair in OJ_A category
+print(oj_a_dataset["train"][0])
+```
 
 ## Evaluation Results
 
