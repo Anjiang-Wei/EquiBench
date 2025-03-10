@@ -21,13 +21,13 @@ class EquiBenchDatasets:
 
             list[str]: A list of configuration names for the dataset.
         """
-        config_names = get_dataset_config_names(self.hf_path)
+        config_names = get_dataset_config_names(path=self.hf_path)
         print(f"{self.hf_path} Dataset configurations: {config_names}")
         return config_names
 
     def load(self, config_name: str) -> Dataset:
         """Load and save a specific configuration of the EquiBench dataset"""
-        dataset_dict = cast(DatasetDict, load_dataset(self.hf_path, name=config_name))
+        dataset_dict = cast(DatasetDict, load_dataset(path=self.hf_path, name=config_name))
         print(f"{self.hf_path} Loading configuration: {config_name}")
         assert dataset_dict.keys() == {"train"}
         dataset = dataset_dict["train"]
