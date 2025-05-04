@@ -120,7 +120,7 @@ def handle_error_anthropic(func):
                 return await func(*args, **kwargs)
             
             except anthropic.RateLimitError as error:
-                # Error code: 429 - {'type': 'error', 'error': {'type': 'rate_limit_error', 'message': 'This request would exceed your organization’s rate limit of 400,000 input tokens per minute. For details, refer to: https://docs.anthropic.com/en/api/rate-limits; see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://www.anthropic.com/contact-sales to discuss your options for a rate limit increase.'}}
+                # Error code: 429 - {'type': 'error', 'error': {'type': 'rate_limit_error', 'message': 'This request would exceed your organization's rate limit of 400,000 input tokens per minute. For details, refer to: https://docs.anthropic.com/en/api/rate-limits; see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://www.anthropic.com/contact-sales to discuss your options for a rate limit increase.'}}
                 match error.body["error"]["type"]:
                     case "rate_limit_error":
                         # sleep and cotinue errors
@@ -131,6 +131,10 @@ def handle_error_anthropic(func):
                         continue
                     case _:
                         raise error
+            except anthropic.APITimeoutError:
+                logging.warning("Timeout occurred, retrying...")
+                await asyncio.sleep(1)
+                continue
 
             # directly raise
             # except openai.AuthenticationError as error:
