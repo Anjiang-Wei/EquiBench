@@ -164,6 +164,11 @@ python step2_eval.py data result/eval --prompt_types ZERO_COT --models openai/gp
 python step2_eval.py data custom_results --prompt_types ZERO FEW
 ```
 
+Finally, run the result summary
+```Shell
+python step3_stat.py
+```
+
 ## Supported Categories
 
 EquiBench contains 2400 pairs of programs across six distinct categories of code equivalence tasks:
